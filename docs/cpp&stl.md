@@ -141,6 +141,21 @@ thread 2 while(y!=1); assert(x == 1) // 可能会失败
 
 导致死锁的4个必要条件：环形依赖（按固定顺序获取资源） ； 互斥（ 不可抢占（支持抢占）；持有且等待（一次性获取资源；获取一个资源后立刻释放另一个）
 
+### 智能指针
+std::shared_ptr: 多个智能指针可以指向同一个对象，对象的引用计数会增加，当引用计数为0时，对象会被自动删除
+
+std::unique_ptr: 一个智能指针只能指向一个对象，对象的引用计数为1，当智能指针被销毁时，对象会被自动删除
+
+std::weak_ptr: std::weak_ptr 是 C++11 引入的弱引用智能指针，它的核心特点是：
+不拥有所指向的对象（不会增加对象的引用计数）；
+仅作为 std::shared_ptr 的 “观察者”，可以安全地访问 std::shared_ptr 管理的对象；
+专门解决 std::shared_ptr 之间的循环引用问题（这是它最核心的使用场景）。
+
+初始化智能指针时，为什么不用 new，而用 make_shared 或 unique_ptr？
+因为 new 会调用构造函数，而 make_shared 或 unique_ptr 会直接在内存中构造对象，避免了两次内存分配的开销。
+make_shared可合并对象内存与引用计数块分配，提升性能且减少内存碎片；
+规避直接用new时可能因异常导致的内存泄漏，同时简化代码、避免手动管理析构逻辑。
+
 # 参考
 
 [https://wizardforcel.gitbooks.io/effective-cpp/content/index.html](https://wizardforcel.gitbooks.io/effective-cpp/content/index.html)  C++ 进阶的核心指南， “避坑 + 最佳实践“
