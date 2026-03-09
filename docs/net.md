@@ -51,6 +51,14 @@ epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout)
 用红黑树+就绪链表，只监听活跃的fd，无拷贝，不用遍历
 
 2、手撕一个最简单的server端服务器（socket、bind、listen、accept这四个API一定要非常熟练）
+socket(int domain, int type, int protocol): 创建socket
+bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen): 绑定ip和端口,服务端必须要有
+listen(int sockfd, int backlog): 监听端口
+accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen): 接受客户端连接
+recv(int sockfd, void *buf, size_t len, int flags): 接收数据
+send(int sockfd, const void *buf, size_t len, int flags): 发送数据
+close(int sockfd): 关闭socket
+
 
 3、线程池
 

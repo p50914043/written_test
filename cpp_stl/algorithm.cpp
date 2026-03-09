@@ -15,5 +15,13 @@ int main() {
   for (int i : v) {
     std::cout << i << ' ';
   }
+
+  std::for_each(std::begin(v), std::end(v), [](int i) { std::cout << i << ' '; });
+  std::find(std::begin(v), std::end(v), 42);
+  std::replace(std::begin(v), std::end(v), 42, 100);
+  std::sort(std::begin(v), std::end(v));
+  std::stable_sort(std::begin(v), std::end(v));
+  // std::accumulate(std::begin(v), std::end(v), 0, [](int a, int b) { return a + b; });
+
   return 0;
 }

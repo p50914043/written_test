@@ -47,6 +47,14 @@ class SharedPtr {
 };
 
 int main() {
+  std::shared_ptr<int> p3(new int(10));
+  auto p4 = std::make_shared<int>(10);
+  auto p5 = std::weak_ptr<int>(p4);
+  std::cout << "p4.use_count(): " << p4.use_count() << std::endl;
+  p5.lock();
+  p5.reset();
+  p5.expired();
+  std::cout << "p4.use_count(): " << p4.use_count() << std::endl;
   SharedPtr<int> p1(new int(10));
   SharedPtr<int> p2(p1);
   std::cout << "p1.use_count(): " << p1.use_count() << std::endl;

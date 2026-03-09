@@ -30,8 +30,9 @@ SOME/IP通信原理：
 
 * 服务发现流程
   * 服务端启动与服务发布：初始等待阶段（避免网络风暴）；重复发送阶段(快速发送）；主阶段（周期发送Offer)；其中包含ServiceID、InstanceID、版本号、IP地址、端口号
-  * 发送服务发现报文主动发现或者通过接收Offer Service被动发现
-  * 建立连接
+  * 订阅端发送服务发现报文主动发现或者通过接收Offer Service被动发现
+  * 建立连接，订阅端订阅指定的事件组
+  * 服务端应答
 * 停止服务：发送StopOfferService报文，宣告服务实例不可用，停止所有业务通信和事件发布
 
 ## ros2
@@ -49,3 +50,39 @@ SOME/IP通信原理：
 特点：序列化数据体积小（二进制格式），序列化速度快（基于内存操作），跨平台（支持多种语言），支持动态扩展（可以在不修改代码的情况下添加新的字段）
 
 ## cdr
+
+## xway的实现方式
+
+生成的类型定义中调用模板类型的仿函数
+
+```
+  template <typename F>
+  void enumerate(F& fun) {
+    fun(data);
+  }
+```
+
+在需要调用序列化的地方，调用类型的eumerate接口，既可以计算长度，也可以实现序列化
+
+序列化：
+
+```
+  template <typename U = value_type>
+  inline void SerializeHelper(typename std::enable_if<is_enumerable<U>::value>::type* = 0) {
+    // if (value_type::IsPlain()) {
+    //   cdr_.serialize_array(reinterpret_cast<const std::uint8_t*>(&value_), sizeof(value_type));
+    //   return;
+    // }
+    SerializingEnumerator enumerator(cdr_);
+    (const_cast<value_type&>(value_).enumerate(enumerator));
+  }
+  /*!
+```
+
+```
+  template <typename T>
+  void operator()(const T& value) {
+    DDSSerializer<T> serializer(cdr_, value);
+    serializer.Serialize();
+  }
+```

@@ -2,6 +2,7 @@
 #include <chrono>
 #include <iostream>
 #include <iterator>
+#include <unique_ptr>
 #include <vector>
 
 class Obj {
