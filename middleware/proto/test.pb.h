@@ -213,7 +213,7 @@ class Test final :
     kIdFieldNumber = 1,
     kAgeFieldNumber = 4,
   };
-  // required string name = 2 [(.test.option.maximum_size) = 10, (.test.option.maximum_string_size) = 20];
+  // required string name = 2 [(.test.option.maximum_size) = 10];
   bool has_name() const;
   private:
   bool _internal_has_name() const;
@@ -513,7 +513,7 @@ inline void Test::set_id(int32_t value) {
   // @@protoc_insertion_point(field_set:test.Test.id)
 }
 
-// required string name = 2 [(.test.option.maximum_size) = 10, (.test.option.maximum_string_size) = 20];
+// required string name = 2 [(.test.option.maximum_size) = 10];
 inline bool Test::_internal_has_name() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;

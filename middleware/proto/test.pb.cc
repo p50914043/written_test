@@ -63,20 +63,20 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_test_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\ntest.proto\022\004test\032\014option.proto\"D\n\004Test"
-  "\022\n\n\002id\030\001 \002(\005\022\026\n\004name\030\002 \002(\tB\010\220\246\035\n\230\246\035\024\022\013\n\003"
-  "age\030\004 \001(\005*\005\010d\020\310\001J\004\010\003\020\004*`\n\010TestEnum\022\025\n\021TE"
-  "ST_ENUM_UNKNOWN\020\000\022\021\n\rTEST_ENUM_ONE\020\001\022\023\n\017"
-  "TEST_ENUM_ALIAS\020\001\022\021\n\rTEST_ENUM_TWO\020\002\032\002\020\001"
-  ":\032\n\006height\022\n.test.Test\030e \001(\005:.\n\nenum_fie"
-  "ld\022\n.test.Test\030f \001(\0162\016.test.TestEnum"
+  "\n\ntest.proto\022\004test\032\014option.proto\"@\n\004Test"
+  "\022\n\n\002id\030\001 \002(\005\022\022\n\004name\030\002 \002(\tB\004\220\246\035\n\022\013\n\003age\030"
+  "\004 \001(\005*\005\010d\020\310\001J\004\010\003\020\004*`\n\010TestEnum\022\025\n\021TEST_E"
+  "NUM_UNKNOWN\020\000\022\021\n\rTEST_ENUM_ONE\020\001\022\023\n\017TEST"
+  "_ENUM_ALIAS\020\001\022\021\n\rTEST_ENUM_TWO\020\002\032\002\020\001:\032\n\006"
+  "height\022\n.test.Test\030e \001(\005:.\n\nenum_field\022\n"
+  ".test.Test\030f \001(\0162\016.test.TestEnum"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_test_2eproto_deps[1] = {
   &::descriptor_table_option_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_test_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_test_2eproto = {
-    false, false, 276, descriptor_table_protodef_test_2eproto,
+    false, false, 272, descriptor_table_protodef_test_2eproto,
     "test.proto",
     &descriptor_table_test_2eproto_once, descriptor_table_test_2eproto_deps, 1, 1,
     schemas, file_default_instances, TableStruct_test_2eproto::offsets,
@@ -216,7 +216,7 @@ const char* Test::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // required string name = 2 [(.test.option.maximum_size) = 10, (.test.option.maximum_string_size) = 20];
+      // required string name = 2 [(.test.option.maximum_size) = 10];
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_name();
@@ -279,7 +279,7 @@ uint8_t* Test::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_id(), target);
   }
 
-  // required string name = 2 [(.test.option.maximum_size) = 10, (.test.option.maximum_string_size) = 20];
+  // required string name = 2 [(.test.option.maximum_size) = 10];
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
@@ -312,7 +312,7 @@ size_t Test::RequiredFieldsByteSizeFallback() const {
   size_t total_size = 0;
 
   if (_internal_has_name()) {
-    // required string name = 2 [(.test.option.maximum_size) = 10, (.test.option.maximum_string_size) = 20];
+    // required string name = 2 [(.test.option.maximum_size) = 10];
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
@@ -332,7 +332,7 @@ size_t Test::ByteSizeLong() const {
   total_size += _extensions_.ByteSize();
 
   if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string name = 2 [(.test.option.maximum_size) = 10, (.test.option.maximum_string_size) = 20];
+    // required string name = 2 [(.test.option.maximum_size) = 10];
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
