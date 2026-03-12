@@ -3,6 +3,13 @@
 #include <iostream>
 #include <vector>
 
+// 值捕获
+// 引用捕获
+// this捕获
+// 隐式捕获
+
+// 捕获是编译过程的行为;参数是运行时行为
+// 值捕获不允许修改捕获的变量，默认为const
 int main() {
   int a = 0;
   auto f = [&a](int x) -> int {

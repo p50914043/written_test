@@ -1,0 +1,25 @@
+syntax="proto2"; // 指定使用的语法版本
+package test; // 包名，解决命名冲突问题
+
+import "option.proto";
+
+enum TestEnum {
+  option allow_alias = true; // 允许枚举值重复，即允许别名
+  TEST_ENUM_UNKNOWN = 0; // 必须有0值，默认值
+  TEST_ENUM_ONE = 1;
+  TEST_ENUM_ALIAS = 1;
+  TEST_ENUM_TWO = 2;
+}
+
+message Test {
+  required int32 id = 1; 
+  required string name = 2 [(test.option.maximum_size)=10, (test.option.maximum_string_size)=20];
+  reserved 3; //保护编号3，不能再使用（可以用于删除字段后保持兼容性）
+  optional int32 age = 4;
+  extensions 100 to 199; // 预留扩展区间
+}
+
+extend Test {
+  optional int32 height = 101; // 扩展字段，用预留区间的号
+  optional TestEnum enum_field = 102;
+}

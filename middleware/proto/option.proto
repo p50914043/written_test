@@ -1,0 +1,13 @@
+syntax = "proto2";
+package test.option;
+
+// 导入内置文件，它定义了 google.protobuf.FieldOptions 等扩展点
+import "google/protobuf/descriptor.proto";
+
+// 通过 extend，你向所有字段的选项中注入两个新字段：
+// ◦ maximum_size：类型为 int64，字段编号 60002
+// ◦ maximum_string_size：类型为 int64，字段编号 60003
+extend google.protobuf.FieldOptions {
+  optional int64 maximum_size = 60002;
+  optional int64 maximum_string_size = 60003;
+}
