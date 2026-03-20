@@ -51,11 +51,21 @@ void myAdvance(IterT& iter, DistT d) {
   doAdvance(iter, d, typename std::iterator_traits<IterT>::iterator_category());  // 调用对应重载
 }
 
+template <typename T, typename ...Args>
+class A {
+ public:
+  A(Args&&... args) {
+    cout << "A(Args&&...)" << endl;
+  }
+
+  
+};
 
 // typename std::iterator_traits<IterT>::iterator_category() 获取迭代器类别
 int main() {
   cout << Fibonacci<10>::value << endl;
   cout << add(1, 2) << endl;
   cout << add(1.1, 2.2) << endl;
+
   return 0;
 }
